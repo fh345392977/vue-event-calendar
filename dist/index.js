@@ -289,6 +289,22 @@ module.exports = function normalizeComponent (
     dayEventsTitle: 'Alla händelser',
     notHaveEvents: 'Inga händelser'
   },
+  no: {
+    dayNames: ["Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"],
+    monthNames: ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"],
+    format: 'MM/yyyy',
+    fullFormat: 'dd/MM/yyyy',
+    dayEventsTitle: 'Alle hendelser',
+    notHaveEvents: 'Ingen hendelser'
+  },
+  'no-nn': {
+    dayNames: ["Søn", "Mån", "Tys", "Ons", "Tor", "Fre", "Lau"],
+    monthNames: ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"],
+    format: 'MM/yyyy',
+    fullFormat: 'dd/MM/yyyy',
+    dayEventsTitle: 'Alle hendinger',
+    notHaveEvents: 'Ingen hendinger'
+  },
   de: {
     dayNames: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
     monthNames: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
@@ -304,6 +320,30 @@ module.exports = function normalizeComponent (
     fullFormat: 'dd/MM/yyyy',
     dayEventsTitle: 'Tất cả sự kiện',
     notHaveEvents: 'Không có sự kiện nào'
+  },
+  ua: {
+    dayNames: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+    monthNames: ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],
+    format: 'MM.yyyy',
+    fullFormat: 'dd.MM.yyyy',
+    dayEventsTitle: 'Усі події',
+    notHaveEvents: 'Події відсутні'
+  },
+  th: {
+    dayNames: ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์"],
+    monthNames: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"],
+    format: 'MM/yyyy',
+    fullFormat: 'dd/MM/yyyy',
+    dayEventsTitle: 'เหตุการณ์',
+    notHaveEvents: 'ไม่มีเหตุการณใดๆ'
+  },
+  hu: {
+    dayNames: ["Hé", "Ke", "Sze", "Сs", "Pé", "Szo", "Va"],
+    monthNames: ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"],
+    format: 'yyyy MM',
+    fullFormat: 'yyyy.MM.dd',
+    dayEventsTitle: 'Események',
+    notHaveEvents: 'Nincs esemény'
   }
 });
 
@@ -654,13 +694,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -709,8 +742,8 @@ var inBrowser = typeof window !== 'undefined';
       } else {
         return {
           options: {
-            locale: 'en', //zh
-            color: ' #f29543'
+            locale: 'zh', //zh
+            color: 'rgb(59, 136, 255)'
           },
           params: {
             curYear: dateObj.getFullYear(),
@@ -811,7 +844,7 @@ function install(Vue) {
   var dateObj = new Date();
   var DEFAULT_OPTION = {
     locale: 'zh', // en
-    color: ' #f29543',
+    color: '#3B88FF',
     className: 'selected-day',
     weekStartOn: 0 // 0 mean sunday
   };
@@ -982,6 +1015,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "cal-events"
   }, [_vm._t("default", _vm._l((_vm.events), function(event, index) {
     return _c('div', {
+      key: index,
       staticClass: "event-item"
     }, [_c('cal-event-item', {
       attrs: {
@@ -1010,16 +1044,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "cur-day-changed": _vm.handleChangeCurDay,
       "month-changed": _vm.handleMonthChanged
     }
-  }), _vm._v(" "), _c('cal-events', {
-    attrs: {
-      "title": _vm.title,
-      "dayEvents": _vm.selectedDayEvents,
-      "locale": _vm.calendarOptions.options.locale,
-      "color": _vm.calendarOptions.options.color
-    }
-  }, [_vm._t("default", null, {
-    showEvents: _vm.selectedDayEvents.events
-  })], 2)], 1)
+  })], 1)
 },staticRenderFns: []}
 
 /***/ }),
@@ -1056,9 +1081,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       key: dayIndex,
       staticClass: "item"
     }, [_vm._v("\n        " + _vm._s(_vm.i18n[_vm.calendar.options.locale].dayNames[(dayIndex + _vm.calendar.options.weekStartOn) % 7]) + "\n      ")])
-  })), _vm._v(" "), _c('div', {
+  }), 0), _vm._v(" "), _c('div', {
     staticClass: "dates"
   }, _vm._l((_vm.dayList), function(date) {
+    var _obj;
+
     return _c('div', {
       key: date.date,
       staticClass: "item",
@@ -1073,7 +1100,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }),
       on: {
         "click": function($event) {
-          _vm.handleChangeCurday(date)
+          return _vm.handleChangeCurday(date)
         }
       }
     }, [_vm._v("\n          " + _vm._s(date.status ? date.date.split('/')[2] : ' '))]), _vm._v(" "), (date.status ? (_vm.today == date.date) : false) ? _c('span', {
@@ -1088,8 +1115,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         backgroundColor: (date.date == _vm.selectedDay) ? _vm.customColor : 'inherit'
       })
     }) : _vm._e()])
-    var _obj;
-  }))])])
+  }), 0)])])
 },staticRenderFns: []}
 
 /***/ })

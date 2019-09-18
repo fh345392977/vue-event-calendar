@@ -7,13 +7,6 @@
       @cur-day-changed="handleChangeCurDay"
       @month-changed="handleMonthChanged">
     </cal-panel>
-    <cal-events
-      :title="title"
-      :dayEvents="selectedDayEvents"
-      :locale="calendarOptions.options.locale"
-      :color="calendarOptions.options.color">
-      <slot :showEvents="selectedDayEvents.events"></slot>
-    </cal-events>
   </div>
 </template>
 <script>
@@ -63,8 +56,8 @@ export default {
       } else {
         return {
           options: {
-            locale: 'en', //zh
-            color: ' #f29543'
+            locale: 'zh', //zh
+            color: 'rgb(59, 136, 255)'
           },
           params: {
               curYear: dateObj.getFullYear(),
@@ -141,7 +134,7 @@ export default {
 }
 </script>
 <style lang="less">
-@base-orange: #f29543;
+@base-orange: rgba(59, 136, 255, 1);
 @white: #ffffff;
 @gray: #e0e0e0;
 @gray-dark: #b1b1b1;
@@ -154,8 +147,6 @@ export default {
     max-width: 1200px;
     margin: 0 auto;
     .cal-wrapper{
-      width: 50%;
-      padding: 100px 50px;
       .date-num{
         line-height: 50px;
       }
@@ -211,8 +202,6 @@ export default {
     .cal-header{
       position: relative;
       width: 100%;
-      background-color: @white;
-      // box-shadow: 0 6px 5px rgba(0,0,0,.1);
       font-weight: 500;
       overflow: hidden;
       padding-bottom: 10px;
@@ -281,16 +270,16 @@ export default {
           .is-event{
             content: '';
             border: 1px solid @base-orange;
-            background-color: #fff;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            background-color: transparent;
+            border-radius: 24px;
+            width: 82px;
+            height: 24px;
             position: absolute;
             left: 50%;
             top: 50%;
             z-index: 1;
-            margin-left: -18px;
-            margin-top: -19px;
+            margin-left: -41px;
+            margin-top: -14px;
           }
           .is-today{
             content: '';
@@ -304,7 +293,7 @@ export default {
             top: 50%;
             z-index: 2;
             margin-left: -6px;
-            margin-top: 8px;
+            margin-top: 12px;
           }
         }
       }
