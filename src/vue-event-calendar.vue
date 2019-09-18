@@ -34,18 +34,7 @@ export default {
     title: String,
     events: {
       type: Array,
-      required: true,
-      default: [],
-      validator (events) {
-        let validate = true
-        events.forEach((event, index) => {
-          if (!event.date) {
-            console.error('Vue-Event-Calendar-Error:' + 'Prop events Wrong at index ' + index)
-            validate = false
-          }
-        })
-        return validate
-      }
+      default: () => []
     }
   },
   computed: {
@@ -279,7 +268,7 @@ export default {
             top: 50%;
             z-index: 1;
             margin-left: -41px;
-            margin-top: -14px;
+            margin-top: -13px;
             cursor: pointer;
           }
           .is-today{

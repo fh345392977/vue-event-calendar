@@ -634,9 +634,7 @@ var inBrowser = typeof window !== 'undefined';
         };
         this.events.forEach(function (event) {
           if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__tools_js__["a" /* isEqualDateStr */])(event.date, tempItem.date)) {
-            tempItem.title = event.title;
-            tempItem.desc = event.desc || '';
-            if (event.customClass) tempItem.customClass.push(event.customClass);
+            tempItem.event = true;
           }
         });
         tempArr.push(tempItem);
@@ -720,17 +718,8 @@ var inBrowser = typeof window !== 'undefined';
     title: String,
     events: {
       type: Array,
-      required: true,
-      default: [],
-      validator: function validator(events) {
-        var validate = true;
-        events.forEach(function (event, index) {
-          if (!event.date) {
-            console.error('Vue-Event-Calendar-Error:' + 'Prop events Wrong at index ' + index);
-            validate = false;
-          }
-        });
-        return validate;
+      default: function _default() {
+        return [];
       }
     }
   },
@@ -1091,12 +1080,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "item",
       class: [( _obj = {
         today: date.status ? (_vm.today == date.date) : false,
-        event: date.status ? (date.title != undefined) : false
+        event: date.status ? (date.event != undefined) : false
       }, _obj[_vm.calendar.options.className] = (date.date == _vm.selectedDay), _obj ) ].concat( date.customClass)
     }, [_c('p', {
       staticClass: "date-num",
       style: ({
-        color: date.title != undefined ? ((date.date == _vm.selectedDay) ? '#fff' : _vm.customColor) : 'inherit'
+        color: date.event != undefined ? ((date.date == _vm.selectedDay) ? '#fff' : _vm.customColor) : 'inherit'
       }),
       on: {
         "click": function($event) {
@@ -1108,7 +1097,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       style: ({
         backgroundColor: _vm.customColor
       })
-    }) : _vm._e(), _vm._v(" "), (date.status ? (date.title != undefined) : false) ? _c('span', {
+    }) : _vm._e(), _vm._v(" "), (date.status ? (date.event != undefined) : false) ? _c('span', {
       staticClass: "is-event",
       style: ({
         borderColor: _vm.customColor,

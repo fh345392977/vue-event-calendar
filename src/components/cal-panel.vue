@@ -19,17 +19,17 @@
         <div v-for="date in dayList" class="item"
           :class="[{
             today: date.status ? (today == date.date) : false,
-            event: date.status ? (date.title != undefined) : false,
+            event: date.status ? (date.event != undefined) : false,
             [calendar.options.className] : (date.date == selectedDay)
           }, ...date.customClass]"
           :key="date.date"
           >
           <p class="date-num"
             @click="handleChangeCurday(date)"
-            :style="{color: date.title != undefined ? ((date.date == selectedDay) ? '#fff' : customColor) : 'inherit'}">
+            :style="{color: date.event != undefined ? ((date.date == selectedDay) ? '#fff' : customColor) : 'inherit'}">
             {{date.status ? date.date.split('/')[2] : '&nbsp;'}}</p>
           <span v-if="date.status ? (today == date.date) : false" class="is-today" :style="{backgroundColor: customColor }" ></span>
-          <span v-if="date.status ? (date.title != undefined) : false" class="is-event"
+          <span v-if="date.status ? (date.event != undefined) : false" class="is-event"
             :style="{borderColor: customColor, backgroundColor: (date.date == selectedDay) ? customColor : 'inherit'}"></span>
         </div>
       </div>
@@ -94,9 +94,7 @@ export default {
           }
           this.events.forEach((event) => {
             if (isEqualDateStr(event.date, tempItem.date)) {
-              tempItem.title = event.title
-              tempItem.desc = event.desc || ''
-              if (event.customClass) tempItem.customClass.push(event.customClass)
+              tempItem.event = true;
             }
           })
           tempArr.push(tempItem)
