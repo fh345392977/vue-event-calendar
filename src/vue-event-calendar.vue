@@ -92,13 +92,13 @@ export default {
           events: events
         }
       }
-      this.$emit('day-changed', {
+      this.$emit('day-change', {
         date: date,
         events: events
       })
     },
     handleMonthChanged (yearMonth) {
-      this.$emit('month-changed', yearMonth)
+      this.$emit('month-change', yearMonth)
     }
   },
   watch: {
