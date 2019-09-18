@@ -280,6 +280,7 @@ export default {
             z-index: 1;
             margin-left: -41px;
             margin-top: -14px;
+            cursor: pointer;
           }
           .is-today{
             content: '';
@@ -350,7 +351,7 @@ export default {
     }
   }
   .arrow-left.icon {
-    color: #000;
+    color: #FFF;
     position: absolute;
     left: 6%;
     margin-top: 10px;
@@ -368,7 +369,7 @@ export default {
             transform: rotate(-135deg);
   }
   .arrow-right.icon {
-    color: #000;
+    color: #FFF;
     position: absolute;
     right: 6%;
     margin-top: 10px;
