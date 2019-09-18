@@ -92,7 +92,7 @@ export default {
             status = 0
           }
           tempItem = {
-            date: `${item.getFullYear()}${divider}${item.getMonth()+1}${divider}${item.getDate()}`,
+            date: `${item.getFullYear()}${this.divider}${item.getMonth()+1}${this.divider}${item.getDate()}`,
             status: status,
             customClass: []
           }
@@ -107,10 +107,10 @@ export default {
     },
     today () {
       let dateObj = new Date()
-      return `${dateObj.getFullYear()}${divider}${dateObj.getMonth()+1}${divider}${dateObj.getDate()}`
+      return `${dateObj.getFullYear()}${this.divider}${dateObj.getMonth()+1}${this.divider}${dateObj.getDate()}`
     },
     curYearMonth () {
-      let tempDate = Date.parse(new Date(`${this.calendar.params.curYear}${divider}${this.calendar.params.curMonth+1}${divider}01`))
+      let tempDate = Date.parse(new Date(`${this.calendar.params.curYear}${this.divider}${this.calendar.params.curMonth+1}${this.divider}01`))
       return dateTimeFormatter(tempDate, this.i18n[this.calendar.options.locale].format)
     },
     customColor () {
