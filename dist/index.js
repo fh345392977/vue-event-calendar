@@ -598,6 +598,10 @@ var inBrowser = typeof window !== 'undefined';
     selectedDay: {
       type: String,
       required: false
+    },
+    divider: {
+      type: String,
+      default: '-'
     }
   },
   computed: {
@@ -628,7 +632,7 @@ var inBrowser = typeof window !== 'undefined';
           status = 0;
         }
         tempItem = {
-          date: item.getFullYear() + '/' + (item.getMonth() + 1) + '/' + item.getDate(),
+          date: '' + item.getFullYear() + divider + (item.getMonth() + 1) + divider + item.getDate(),
           status: status,
           customClass: []
         };
@@ -643,10 +647,10 @@ var inBrowser = typeof window !== 'undefined';
     },
     today: function today() {
       var dateObj = new Date();
-      return dateObj.getFullYear() + '/' + (dateObj.getMonth() + 1) + '/' + dateObj.getDate();
+      return '' + dateObj.getFullYear() + divider + (dateObj.getMonth() + 1) + divider + dateObj.getDate();
     },
     curYearMonth: function curYearMonth() {
-      var tempDate = Date.parse(new Date(this.calendar.params.curYear + '/' + (this.calendar.params.curMonth + 1) + '/01'));
+      var tempDate = Date.parse(new Date('' + this.calendar.params.curYear + divider + (this.calendar.params.curMonth + 1) + divider + '01'));
       return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__tools_js__["b" /* dateTimeFormatter */])(tempDate, this.i18n[this.calendar.options.locale].format);
     },
     customColor: function customColor() {
@@ -692,6 +696,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -721,6 +726,10 @@ var inBrowser = typeof window !== 'undefined';
       default: function _default() {
         return [];
       }
+    },
+    divider: {
+      type: String,
+      default: '-'
     }
   },
   computed: {
@@ -1026,6 +1035,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('cal-panel', {
     attrs: {
       "events": _vm.events,
+      "divider": _vm.divider,
       "calendar": _vm.calendarOptions,
       "selectedDay": _vm.selectedDayEvents.date
     },
@@ -1092,7 +1102,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           return _vm.handleChangeCurday(date)
         }
       }
-    }, [_vm._v("\n          " + _vm._s(date.status ? date.date.split('/')[2] : ' '))]), _vm._v(" "), (date.status ? (_vm.today == date.date) : false) ? _c('span', {
+    }, [_vm._v("\n          " + _vm._s(date.status ? date.date.split(_vm.divider)[2] : ' '))]), _vm._v(" "), (date.status ? (_vm.today == date.date) : false) ? _c('span', {
       staticClass: "is-today",
       style: ({
         backgroundColor: _vm.customColor

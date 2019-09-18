@@ -2,6 +2,7 @@
   <div class="__vev_calendar-wrapper">
     <cal-panel
       :events="events"
+      :divider="divider"
       :calendar="calendarOptions"
       :selectedDay='selectedDayEvents.date'
       @cur-day-changed="handleChangeCurDay"
@@ -35,6 +36,10 @@ export default {
     events: {
       type: Array,
       default: () => []
+    },
+    divider: {
+      type: String,
+      default: '-'
     }
   },
   computed: {

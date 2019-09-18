@@ -27,7 +27,7 @@
           <p class="date-num"
             @click="handleChangeCurday(date)"
             :style="{color: date.event != undefined ? ((date.date == selectedDay) ? '#fff' : customColor) : 'inherit'}">
-            {{date.status ? date.date.split('/')[2] : '&nbsp;'}}</p>
+            {{date.status ? date.date.split(divider)[2] : '&nbsp;'}}</p>
           <span v-if="date.status ? (today == date.date) : false" class="is-today" :style="{backgroundColor: customColor }" ></span>
           <span v-if="date.status ? (date.event != undefined) : false" class="is-event"
             :style="{borderColor: customColor, backgroundColor: (date.date == selectedDay) ? customColor : 'inherit'}"></span>
@@ -61,6 +61,10 @@ export default {
     selectedDay: {
       type: String,
       required: false
+    },
+    divider: {
+      type: String,
+      default: '-'
     }
   },
   computed: {
@@ -88,7 +92,7 @@ export default {
             status = 0
           }
           tempItem = {
-            date: `${item.getFullYear()}/${item.getMonth()+1}/${item.getDate()}`,
+            date: `${item.getFullYear()}${divider}${item.getMonth()+1}${divider}${item.getDate()}`,
             status: status,
             customClass: []
           }
@@ -103,10 +107,10 @@ export default {
     },
     today () {
       let dateObj = new Date()
-      return `${dateObj.getFullYear()}/${dateObj.getMonth()+1}/${dateObj.getDate()}`
+      return `${dateObj.getFullYear()}${divider}${dateObj.getMonth()+1}${divider}${dateObj.getDate()}`
     },
     curYearMonth () {
-      let tempDate = Date.parse(new Date(`${this.calendar.params.curYear}/${this.calendar.params.curMonth+1}/01`))
+      let tempDate = Date.parse(new Date(`${this.calendar.params.curYear}${divider}${this.calendar.params.curMonth+1}${divider}01`))
       return dateTimeFormatter(tempDate, this.i18n[this.calendar.options.locale].format)
     },
     customColor () {
